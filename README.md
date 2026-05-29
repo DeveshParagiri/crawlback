@@ -4,6 +4,16 @@ Crawlback is a Common Crawl backlink intelligence pipeline for Omni's Growth Mar
 
 The project was built for Omni's Growth Engineering take-home. It includes an ETL pipeline, dbt analytics models, Omni semantic-layer files, and the data needed to build an Omni dashboard.
 
+## Live Dashboard
+
+The live Omni dashboard is available here: [Omni Growth Intelligence](https://dparagiri.embed-omniapp.co/dashboards/35441517).
+
+GitHub Markdown does not render iframe embeds in README files, so the embed snippet is included here for hosts that allow iframes:
+
+```html
+<iframe allow="clipboard-write; microphone" src="https://dparagiri.embed-omniapp.co/dashboards/35441517"></iframe>
+```
+
 ## Executive Summary
 
 The business question is: which domains already write about analytics and BI competitors, are missing Omni, and are worth Growth Marketing investigation?
