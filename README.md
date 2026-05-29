@@ -221,8 +221,6 @@ uv run dbt build --project-dir dbt --profiles-dir dbt
 uv run --env-file .env dbt build --project-dir dbt --profiles-dir dbt --target motherduck
 ```
 
-Current verification status is green: clean-clone `uv sync --locked` succeeds, `ruff` passes, formatting passes, `mypy` passes, `pytest` reports `46 passed`, dbt parse succeeds, local dbt build reports `PASS=85 WARN=0 ERROR=0`, and MotherDuck dbt build reports `PASS=85 WARN=0 ERROR=0`.
-
 ### Expected Row Counts
 
 | Object | Rows |
