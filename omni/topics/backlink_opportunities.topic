@@ -1,0 +1,26 @@
+base_view: fct_backlink_opportunities
+label: Backlink Opportunities
+group_label: Growth Marketing
+description: Prioritized domains that link to competitors but not Omni.
+default_row_limit: 500
+
+fields:
+  - fct_backlink_opportunities.*
+
+sample_queries:
+  Top Opportunities:
+    description: Highest-scoring backlink opportunities for Growth Marketing.
+    query:
+      topic: backlink_opportunities
+      base_view: fct_backlink_opportunities
+      fields:
+        - fct_backlink_opportunities.opportunity_domain
+        - fct_backlink_opportunities.opportunity_score
+        - fct_backlink_opportunities.opportunity_tier
+        - fct_backlink_opportunities.linked_competitors
+        - fct_backlink_opportunities.source_domain_rank_bucket
+        - fct_backlink_opportunities.recommended_action
+      sorts:
+        - field: fct_backlink_opportunities.opportunity_score
+          desc: true
+      limit: 100

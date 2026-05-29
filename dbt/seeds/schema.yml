@@ -1,0 +1,26 @@
+version: 2
+
+seeds:
+  - name: companies
+    description: Version-controlled company and competitor configuration shared with dbt.
+    columns:
+      - name: company
+        description: Company display name.
+        data_tests:
+          - not_null
+      - name: role
+        description: Target or competitor role.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["target", "competitor"]
+      - name: segment
+        description: Competitive segment used for summary and scoring.
+        data_tests:
+          - not_null
+      - name: domain
+        description: Canonical company domain.
+        data_tests:
+          - not_null
+          - unique

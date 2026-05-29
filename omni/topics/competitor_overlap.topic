@@ -1,0 +1,29 @@
+base_view: mart_competitor_overlap
+label: Competitor Overlap
+group_label: Growth Marketing
+description: Competitor referring-domain overlap compared with Omni.
+default_row_limit: 100
+
+fields:
+  - mart_competitor_overlap.*
+  - dim_companies.*
+
+joins:
+  dim_companies: {}
+
+sample_queries:
+  Competitor Overlap:
+    description: Competitors with the largest overlap and competitor-only pools.
+    query:
+      topic: competitor_overlap
+      base_view: mart_competitor_overlap
+      fields:
+        - mart_competitor_overlap.competitor_company
+        - mart_competitor_overlap.competitor_segment
+        - mart_competitor_overlap.overlap_domain_count
+        - mart_competitor_overlap.competitor_only_domain_count
+        - mart_competitor_overlap.jaccard_overlap
+      sorts:
+        - field: mart_competitor_overlap.competitor_only_domain_count
+          desc: true
+      limit: 100

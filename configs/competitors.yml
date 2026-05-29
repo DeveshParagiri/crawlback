@@ -1,0 +1,61 @@
+companies:
+  - company: Omni
+    role: target
+    segment: target
+    domains:
+      - omni.co
+  - company: Sigma
+    role: competitor
+    segment: direct_modern_bi
+    domains:
+      - sigmacomputing.com
+  - company: Looker
+    role: competitor
+    segment: direct_modern_bi
+    domains:
+      - looker.com
+  - company: ThoughtSpot
+    role: competitor
+    segment: direct_modern_bi
+    domains:
+      - thoughtspot.com
+  - company: Hex
+    role: competitor
+    segment: analytics_workspace
+    domains:
+      - hex.tech
+  - company: Lightdash
+    role: competitor
+    segment: semantic_layer_adjacent
+    domains:
+      - lightdash.com
+  - company: Cube
+    role: competitor
+    segment: semantic_layer_adjacent
+    domains:
+      - cube.dev
+  - company: Metabase
+    role: competitor
+    segment: oss_self_serve_bi
+    domains:
+      - metabase.com
+  - company: Evidence
+    role: competitor
+    segment: data_app_adjacent
+    domains:
+      - evidence.dev
+  - company: Rill
+    role: competitor
+    segment: data_app_adjacent
+    domains:
+      - rilldata.com
+  - company: Tableau
+    role: competitor
+    segment: enterprise_incumbent
+    domains:
+      - tableau.com
+  - company: Mode
+    role: competitor
+    segment: legacy_acquired
+    domains:
+      - mode.com

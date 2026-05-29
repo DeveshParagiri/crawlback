@@ -1,0 +1,57 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: Raw Common Crawl records loaded by the Python ETL.
+    tables:
+      - name: raw_common_crawl_domain_edges
+        description: Domain-level Common Crawl Web Graph edges filtered to Omni and configured competitors.
+        columns:
+          - name: graph_release_id
+            description: Common Crawl Web Graph release identifier.
+            data_tests:
+              - not_null
+          - name: source_domain
+            description: Referring root domain.
+            data_tests:
+              - not_null
+          - name: target_company
+            description: Omni or configured competitor mapped from the target domain.
+            data_tests:
+              - not_null
+          - name: target_segment
+            description: Competitive segment from the company configuration.
+            data_tests:
+              - not_null
+          - name: source_high_authority_flag
+            description: True when the source domain rank bucket is considered high authority.
+            data_tests:
+              - not_null
+      - name: raw_common_crawl_domain_ranks
+        description: Common Crawl domain rank records resolved for source domains in the filtered edge set.
+        columns:
+          - name: graph_release_id
+            description: Common Crawl Web Graph release identifier.
+            data_tests:
+              - not_null
+          - name: rank_entity_type
+            description: Whether the row describes a domain or host.
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ["domain", "host"]
+          - name: domain_or_host
+            description: Ranked domain or host.
+            data_tests:
+              - not_null
+      - name: raw_common_crawl_wat_link_evidence
+        description: Optional page-level WAT evidence for top graph-derived backlink opportunities.
+        columns:
+          - name: crawl_id
+            description: Common Crawl crawl snapshot identifier.
+          - name: source_domain
+            description: Referring domain from the page-level evidence row.
+          - name: target_company
+            description: Omni or competitor linked from the source page.

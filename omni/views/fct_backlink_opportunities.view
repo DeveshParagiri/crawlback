@@ -1,0 +1,29 @@
+description: Ranked domains that link to competitors but not Omni.
+schema: analytics
+table_name: fct_backlink_opportunities
+primary_key_sql: [ "${fct_backlink_opportunities.graph_release_id}", "${fct_backlink_opportunities.opportunity_domain}" ]
+
+measures:
+  opportunity_count:
+    aggregate_type: count
+    label: Opportunities
+  tier_1_opportunities:
+    aggregate_type: count
+    filters:
+      opportunity_tier:
+        is: tier_1
+    label: Tier 1 Opportunities
+  high_authority_opportunities:
+    aggregate_type: count
+    filters:
+      source_high_authority_flag:
+        is: true
+    label: High-Authority Opportunities
+  average_opportunity_score:
+    sql: ${opportunity_score}
+    aggregate_type: average
+    label: Average Opportunity Score
+  max_opportunity_score:
+    sql: ${opportunity_score}
+    aggregate_type: max
+    label: Max Opportunity Score

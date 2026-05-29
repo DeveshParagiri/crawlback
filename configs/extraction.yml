@@ -1,0 +1,6 @@
+graph_release_id: cc-main-2026-feb-mar-apr
+crawl_id: CC-MAIN-2026-17
+max_wat_enrichment_domains: 500
+high_authority_rank_buckets:
+  - top_10k
+  - top_100k

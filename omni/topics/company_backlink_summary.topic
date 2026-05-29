@@ -1,0 +1,29 @@
+base_view: mart_company_backlink_summary
+label: Company Backlink Summary
+group_label: Growth Marketing
+description: Referring-domain footprint and backlink strength proxy by company.
+default_row_limit: 100
+
+fields:
+  - mart_company_backlink_summary.*
+  - dim_companies.*
+
+joins:
+  dim_companies: {}
+
+sample_queries:
+  Company Footprint:
+    description: Referring domains and high-authority referring domains by company.
+    query:
+      topic: company_backlink_summary
+      base_view: mart_company_backlink_summary
+      fields:
+        - mart_company_backlink_summary.target_company
+        - mart_company_backlink_summary.target_segment
+        - mart_company_backlink_summary.referring_domain_count
+        - mart_company_backlink_summary.high_authority_referring_domain_count
+        - mart_company_backlink_summary.backlink_strength_proxy
+      sorts:
+        - field: mart_company_backlink_summary.referring_domain_count
+          desc: true
+      limit: 100

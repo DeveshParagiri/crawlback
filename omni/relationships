@@ -1,0 +1,17 @@
+- join_from_view: fct_backlinks
+  join_to_view: dim_companies
+  join_type: always_left
+  relationship_type: many_to_one
+  on_sql: ${fct_backlinks.target_company} = ${dim_companies.company}
+
+- join_from_view: mart_company_backlink_summary
+  join_to_view: dim_companies
+  join_type: always_left
+  relationship_type: many_to_one
+  on_sql: ${mart_company_backlink_summary.target_company} = ${dim_companies.company}
+
+- join_from_view: mart_competitor_overlap
+  join_to_view: dim_companies
+  join_type: always_left
+  relationship_type: many_to_one
+  on_sql: ${mart_competitor_overlap.competitor_company} = ${dim_companies.company}

@@ -1,0 +1,19 @@
+name: crawlback
+version: "0.1.0"
+config-version: 2
+
+profile: crawlback
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+
+models:
+  crawlback:
+    +materialized: table
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: table
+    marts:
+      +materialized: table

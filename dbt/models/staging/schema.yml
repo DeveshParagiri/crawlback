@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: stg_companies
+    description: Clean company configuration used by dbt models and Omni dimensions.
+    columns:
+      - name: company
+        description: Company display name.
+        data_tests:
+          - not_null
+      - name: role
+        description: Whether the company is Omni or a competitor.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["target", "competitor"]
+      - name: domain
+        description: Canonical company domain.
+        data_tests:
+          - not_null
+          - unique
+  - name: stg_domain_edges
+    description: Deduplicated graph edges at one row per graph release, referring domain, and target company.
+    columns:
+      - name: graph_release_id
+        description: Common Crawl Web Graph release identifier.
+        data_tests:
+          - not_null
+      - name: source_domain
+        description: Referring domain.
+        data_tests:
+          - not_null
+      - name: target_company
+        description: Omni or competitor linked by the source domain.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_companies')
+                field: company
+      - name: source_high_authority_flag
+        description: True when the source rank bucket is top_10k or top_100k.
+        data_tests:
+          - not_null
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - graph_release_id
+              - source_domain
+              - target_company
+  - name: stg_domain_ranks
+    description: Deduplicated Common Crawl rank records for domains and hosts.
+    columns:
+      - name: graph_release_id
+        description: Common Crawl Web Graph release identifier.
+        data_tests:
+          - not_null
+      - name: domain_or_host
+        description: Ranked domain or host.
+        data_tests:
+          - not_null
+      - name: rank_bucket
+        description: Human-readable rank bucket used for authority thresholds.
+  - name: stg_wat_link_evidence
+    description: Optional page-level evidence extracted from WAT files for prioritized opportunities.
+    columns:
+      - name: source_domain
+        description: Referring domain on the evidence page.
+      - name: evidence_text
+        description: Lowercase searchable text across URL, title, and anchor fields.

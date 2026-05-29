@@ -1,0 +1,25 @@
+description: Company-level backlink footprint and strength proxy.
+schema: analytics
+table_name: mart_company_backlink_summary
+primary_key_sql: [ "${mart_company_backlink_summary.graph_release_id}", "${mart_company_backlink_summary.target_company}" ]
+
+measures:
+  company_rows:
+    aggregate_type: count
+    label: Company Rows
+  referring_domains:
+    sql: ${referring_domain_count}
+    aggregate_type: sum
+    label: Referring Domains
+  high_authority_referring_domains:
+    sql: ${high_authority_referring_domain_count}
+    aggregate_type: sum
+    label: High-Authority Referring Domains
+  average_backlink_strength_proxy:
+    sql: ${backlink_strength_proxy}
+    aggregate_type: average
+    label: Average Backlink Strength Proxy
+  max_backlink_strength_proxy:
+    sql: ${backlink_strength_proxy}
+    aggregate_type: max
+    label: Max Backlink Strength Proxy

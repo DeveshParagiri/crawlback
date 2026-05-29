@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: int_domain_rank_rollup
+    description: Best available domain-level Common Crawl rank per graph release and source domain.
+    columns:
+      - name: graph_release_id
+        data_tests:
+          - not_null
+      - name: source_domain
+        data_tests:
+          - not_null
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - graph_release_id
+              - source_domain
+  - name: int_referring_domain_company
+    description: Referring domain to target company table enriched with rank signals.
+    columns:
+      - name: graph_release_id
+        data_tests:
+          - not_null
+      - name: source_domain
+        data_tests:
+          - not_null
+      - name: target_company
+        data_tests:
+          - not_null
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - graph_release_id
+              - source_domain
+              - target_company
+  - name: int_referring_domain_company_matrix
+    description: One row per referring domain with company link booleans and competitor coverage counts.
+    columns:
+      - name: graph_release_id
+        data_tests:
+          - not_null
+      - name: source_domain
+        data_tests:
+          - not_null
+      - name: competitor_count
+        data_tests:
+          - not_null
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - graph_release_id
+              - source_domain
+  - name: int_competitor_overlap
+    description: Competitor overlap calculations against Omni.
+    columns:
+      - name: competitor_company
+        data_tests:
+          - not_null
+      - name: jaccard_overlap
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "jaccard_overlap >= 0 and jaccard_overlap <= 1"
+  - name: int_opportunity_evidence_examples
+    description: Best page-level WAT evidence row per source domain where enrichment exists.

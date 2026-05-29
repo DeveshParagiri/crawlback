@@ -1,0 +1,13 @@
+company,role,segment,domain
+Omni,target,target,omni.co
+Sigma,competitor,direct_modern_bi,sigmacomputing.com
+Looker,competitor,direct_modern_bi,looker.com
+ThoughtSpot,competitor,direct_modern_bi,thoughtspot.com
+Hex,competitor,analytics_workspace,hex.tech
+Lightdash,competitor,semantic_layer_adjacent,lightdash.com
+Cube,competitor,semantic_layer_adjacent,cube.dev
+Metabase,competitor,oss_self_serve_bi,metabase.com
+Evidence,competitor,data_app_adjacent,evidence.dev
+Rill,competitor,data_app_adjacent,rilldata.com
+Tableau,competitor,enterprise_incumbent,tableau.com
+Mode,competitor,legacy_acquired,mode.com

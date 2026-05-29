@@ -1,0 +1,13 @@
+crawlback:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('CRAWLBACK_DUCKDB_PATH', 'data/crawlback.duckdb') }}"
+      schema: analytics
+      threads: 4
+    motherduck:
+      type: duckdb
+      path: "md:{{ env_var('MOTHERDUCK_DATABASE', 'crawlback') }}?motherduck_token={{ env_var('MOTHERDUCK_TOKEN', '') }}"
+      schema: analytics
+      threads: 4

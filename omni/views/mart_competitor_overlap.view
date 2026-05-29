@@ -1,0 +1,25 @@
+description: Competitor referring-domain overlap against Omni.
+schema: analytics
+table_name: mart_competitor_overlap
+primary_key_sql: [ "${mart_competitor_overlap.graph_release_id}", "${mart_competitor_overlap.competitor_company}" ]
+
+measures:
+  competitor_rows:
+    aggregate_type: count
+    label: Competitors
+  competitor_referring_domains:
+    sql: ${competitor_referring_domain_count}
+    aggregate_type: sum
+    label: Competitor Referring Domains
+  overlap_domains:
+    sql: ${overlap_domain_count}
+    aggregate_type: sum
+    label: Overlap Domains
+  competitor_only_domains:
+    sql: ${competitor_only_domain_count}
+    aggregate_type: sum
+    label: Competitor-Only Domains
+  average_jaccard_overlap:
+    sql: ${jaccard_overlap}
+    aggregate_type: average
+    label: Average Jaccard Overlap

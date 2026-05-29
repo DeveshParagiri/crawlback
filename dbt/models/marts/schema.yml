@@ -1,0 +1,115 @@
+version: 2
+
+models:
+  - name: dim_companies
+    description: Company dimension for Omni and configured competitors.
+    columns:
+      - name: company
+        data_tests:
+          - not_null
+          - unique
+      - name: role
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["target", "competitor"]
+  - name: fct_backlinks
+    description: One row per graph release, referring domain, and linked target company.
+    columns:
+      - name: graph_release_id
+        data_tests:
+          - not_null
+      - name: referring_domain
+        data_tests:
+          - not_null
+      - name: target_company
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_companies')
+                field: company
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - graph_release_id
+              - referring_domain
+              - target_company
+  - name: fct_backlink_opportunities
+    description: Ranked domains that link to one or more competitors but do not link to Omni.
+    columns:
+      - name: graph_release_id
+        data_tests:
+          - not_null
+      - name: opportunity_domain
+        data_tests:
+          - not_null
+      - name: links_to_omni
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "links_to_omni = false"
+      - name: competitor_count
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "competitor_count > 0"
+      - name: opportunity_score
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "opportunity_score >= 0 and opportunity_score <= 100"
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - graph_release_id
+              - opportunity_domain
+  - name: mart_company_backlink_summary
+    description: Company-level backlink footprint and Common-Crawl-derived strength proxy.
+    columns:
+      - name: target_company
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_companies')
+                field: company
+      - name: referring_domain_count
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "referring_domain_count >= 0"
+      - name: high_authority_referring_domain_count
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "high_authority_referring_domain_count >= 0"
+      - name: backlink_strength_proxy
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "backlink_strength_proxy >= 0 and backlink_strength_proxy <= 100"
+  - name: mart_competitor_overlap
+    description: Competitor-by-competitor overlap with Omni referring domains.
+    columns:
+      - name: competitor_company
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_companies')
+                field: company
+      - name: jaccard_overlap
+        data_tests:
+          - not_null
+          - expression_is_true:
+              arguments:
+                expression: "jaccard_overlap >= 0 and jaccard_overlap <= 1"

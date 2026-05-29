@@ -1,0 +1,9 @@
+included_schemas: [analytics]
+ai_chat_topics: [backlink_opportunities, company_backlink_summary, competitor_overlap]
+default_numeric_locale: en_US
+
+ai_context: |
+  This model supports Omni backlink intelligence for Growth Marketing.
+  Use Common Crawl Web Graph domain edges and domain ranks as the v1 source of truth.
+  Treat backlink strength as a Common-Crawl-derived proxy, not as Ahrefs, Moz, Semrush, traffic, or Google ranking authority.
+  WAT page-level evidence fields are wired for future enrichment but are not populated in the current v1 run.

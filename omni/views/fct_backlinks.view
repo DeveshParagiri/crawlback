@@ -1,0 +1,24 @@
+description: Referring-domain backlinks from Common Crawl Web Graph.
+schema: analytics
+table_name: fct_backlinks
+primary_key_sql: [ "${fct_backlinks.graph_release_id}", "${fct_backlinks.referring_domain}", "${fct_backlinks.target_company}" ]
+
+measures:
+  backlink_rows:
+    aggregate_type: count
+    label: Backlink Rows
+  referring_domains:
+    sql: ${referring_domain}
+    aggregate_type: count_distinct
+    label: Referring Domains
+  high_authority_referring_domains:
+    sql: ${referring_domain}
+    aggregate_type: count_distinct
+    filters:
+      source_high_authority_flag:
+        is: true
+    label: High-Authority Referring Domains
+  total_edge_weight:
+    sql: ${total_edge_weight}
+    aggregate_type: sum
+    label: Total Edge Weight

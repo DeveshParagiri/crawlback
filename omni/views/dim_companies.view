@@ -1,0 +1,10 @@
+description: Company dimension for Omni and configured competitors.
+schema: analytics
+table_name: dim_companies
+primary_key_sql: [ "${dim_companies.company}" ]
+
+measures:
+  company_count:
+    sql: ${company}
+    aggregate_type: count_distinct
+    label: Companies
