@@ -6,7 +6,7 @@ Live dashboard: [Omni Growth Intelligence](https://dparagiri.embed-omniapp.co/da
 
 ## Executive Summary
 
-The business question is simple: which domains already mention analytics and BI competitors, are missing Omni, and are worth Growth Marketing investigation?
+The analysis focuses on one Growth Marketing question: which domains already mention analytics and BI competitors, are missing Omni, and are worth Growth Marketing investigation?
 
 The current run uses Common Crawl Web Graph release `cc-main-2026-feb-mar-apr`, from crawl snapshot `CC-MAIN-2026-17`. The domain graph contains `124,646,710` domain nodes and `4,756,191,406` domain-to-domain edges. The extractor streamed the graph, filtered it to Omni and configured competitors, and kept `49,603` relevant backlink edges from `45,023` distinct referring domains.
 
@@ -18,13 +18,13 @@ The most actionable overlap signal is with adjacent modern-BI and semantic-layer
 
 The top-ranked opportunity domains include broad developer, data, startup, and software ecosystems such as `github.com`, `dev.to`, `ycombinator.com`, `github.io`, `blogspot.com`, `tdwi.org`, `builtin.com`, `fivetran.com`, and `stackshare.io`. These should not be treated as automatic outreach targets. They are the first review queue because they combine authority, competitor co-linking, and category-adjacent signal.
 
-## Plain-English Read
+## Business Context
 
-Omni wants to know where competitors are being mentioned on the web and where Omni is missing from that conversation. Crawlback uses public Common Crawl link data to find domains that link to BI and analytics competitors such as Tableau, Looker, Sigma, Hex, Metabase, and ThoughtSpot.
+Growth Marketing needs a prioritized review queue, not a raw backlink dump. Crawlback starts from domains that already link to analytics and BI competitors such as Tableau, Looker, Sigma, Hex, Metabase, and ThoughtSpot, then removes domains that also link to Omni in the same Common Crawl snapshot.
 
-The useful signal is not only "this site is popular." The stronger signal is "this site already links to several companies in Omni's category, but not to Omni." That makes the domain more likely to be relevant for marketing review, comparison-page outreach, partner ecosystem review, or content strategy.
+The strongest signal is competitor co-linking. A domain that links to several companies in Omni's category has already shown category interest. If Omni is absent, that domain becomes a plausible coverage gap for marketing review, comparison-page outreach, partner ecosystem analysis, or content strategy.
 
-The output is a ranked list of domains for Growth Marketing to inspect first. The dashboard also shows how Omni's backlink footprint compares with competitors, which competitors overlap most with Omni's current footprint, and how many opportunities fall into each priority tier.
+The dashboard turns this into an investigation workflow: ranked opportunities first, then company backlink footprint, competitor overlap, and opportunity-tier distribution for context.
 
 ## Dashboard Preview
 
