@@ -176,39 +176,6 @@ flowchart TD
     I --> J["Growth Marketing review queue"]
 ```
 
-```text
-Common Crawl Web Graph
-  domain vertices, domain edges, domain ranks
-        |
-        | stream, filter, normalize, rank
-        v
-data/extracts/cc-main-2026-feb-mar-apr/
-  target_vertices.csv
-  filtered_domain_edges.csv
-  source_vertices.csv
-  domain_ranks.csv
-  graph_edges.csv
-        |
-        | scripts/load_graph.py
-        v
-DuckDB locally or MotherDuck for Omni
-  raw.raw_common_crawl_domain_edges
-  raw.raw_common_crawl_domain_ranks
-  raw.raw_common_crawl_wat_link_evidence
-        |
-        | dbt staging, intermediate, marts
-        v
-analytics.dim_companies
-analytics.fct_backlinks
-analytics.fct_backlink_opportunities
-analytics.mart_company_backlink_summary
-analytics.mart_competitor_overlap
-        |
-        | Omni model files
-        v
-Omni Topics and dashboard
-```
-
 ## Repo Layout
 
 ```text
