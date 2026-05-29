@@ -204,7 +204,7 @@ The MotherDuck flow loads the same raw graph artifacts and builds the same dbt m
 
 ### Verify
 
-These checks work from a fresh clone and do not require Common Crawl data:
+Run the code quality and project validation checks:
 
 ```bash
 uv run ruff check .
@@ -214,7 +214,7 @@ uv run pytest
 uv run dbt parse --project-dir dbt --profiles-dir dbt
 ```
 
-After `extract_graph.py` and `load_graph.py` have populated the raw tables, verify the modeled tables with:
+After the raw graph tables are loaded, run the dbt builds:
 
 ```bash
 uv run dbt build --project-dir dbt --profiles-dir dbt
