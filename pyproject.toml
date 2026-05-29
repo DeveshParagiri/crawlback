@@ -1,7 +1,7 @@
 [project]
 name = "crawlback"
 version = "0.1.0"
-description = "Backlink intelligence pipeline for Omni's growth engineering take-home."
+description = "Backlink intelligence pipeline for Omni's Growth Marketing team."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
