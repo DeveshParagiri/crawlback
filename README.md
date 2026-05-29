@@ -176,7 +176,7 @@ Scoring, joins, and business definitions live in dbt so they are version-control
 ### Setup
 
 ```bash
-uv sync
+uv sync --locked
 cp .env.example .env
 ```
 
@@ -204,16 +204,24 @@ The MotherDuck flow loads the same raw graph artifacts and builds the same dbt m
 
 ### Verify
 
+These checks work from a fresh clone and do not require Common Crawl data:
+
 ```bash
 uv run ruff check .
 uv run ruff format --check .
 uv run mypy src tests scripts
 uv run pytest
+uv run dbt parse --project-dir dbt --profiles-dir dbt
+```
+
+After `extract_graph.py` and `load_graph.py` have populated the raw tables, verify the modeled tables with:
+
+```bash
 uv run dbt build --project-dir dbt --profiles-dir dbt
 uv run --env-file .env dbt build --project-dir dbt --profiles-dir dbt --target motherduck
 ```
 
-Current verification status is green: `ruff` passes, formatting passes, `mypy` passes, `pytest` reports `46 passed`, local dbt reports `PASS=85 WARN=0 ERROR=0`, and MotherDuck dbt reports `PASS=85 WARN=0 ERROR=0`.
+Current verification status is green: clean-clone `uv sync --locked` succeeds, `ruff` passes, formatting passes, `mypy` passes, `pytest` reports `46 passed`, dbt parse succeeds, local dbt build reports `PASS=85 WARN=0 ERROR=0`, and MotherDuck dbt build reports `PASS=85 WARN=0 ERROR=0`.
 
 ### Expected Row Counts
 
