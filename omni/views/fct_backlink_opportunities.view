@@ -6,7 +6,7 @@ primary_key_sql: [ "${fct_backlink_opportunities.graph_release_id}", "${fct_back
 measures:
   opportunity_count:
     aggregate_type: count
-    label: Opportunities
+    label: Opportunity Count
   tier_1_opportunities:
     aggregate_type: count
     filters:
@@ -19,6 +19,24 @@ measures:
       source_high_authority_flag:
         is: true
     label: High-Authority Opportunities
+  tier_2_opportunities:
+    aggregate_type: count
+    filters:
+      opportunity_tier:
+        is: tier_2
+    label: Tier 2 Opportunities
+  tier_3_opportunities:
+    aggregate_type: count
+    filters:
+      opportunity_tier:
+        is: tier_3
+    label: Tier 3 Opportunities
+  monitor_opportunities:
+    aggregate_type: count
+    filters:
+      opportunity_tier:
+        is: monitor
+    label: Monitor Opportunities
   average_opportunity_score:
     sql: ${opportunity_score}
     aggregate_type: average

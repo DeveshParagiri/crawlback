@@ -22,6 +22,7 @@ sample_queries:
         - mart_competitor_overlap.competitor_segment
         - mart_competitor_overlap.overlap_domain_count
         - mart_competitor_overlap.competitor_only_domain_count
+        - mart_competitor_overlap.omni_only_domain_count
         - mart_competitor_overlap.jaccard_overlap
       sorts:
         - field: mart_competitor_overlap.competitor_only_domain_count
