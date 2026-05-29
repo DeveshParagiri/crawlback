@@ -2,19 +2,11 @@
 
 Crawlback is a Common Crawl backlink intelligence pipeline for Omni's Growth Marketing team. It identifies domains that link to Omni's analytics and BI competitors, do not appear to link to Omni, and should be reviewed as backlink outreach opportunities.
 
-The project was built for Omni's Growth Engineering take-home. It includes an ETL pipeline, dbt analytics models, Omni semantic-layer files, and the data needed to build an Omni dashboard.
-
-## Live Dashboard
-
-The live Omni dashboard is available here: [Omni Growth Intelligence](https://dparagiri.embed-omniapp.co/dashboards/35441517).
-
-GitHub Markdown does not render iframe embeds in README files, so the embed snippet is included here for hosts that allow iframes:
-
-```html
-<iframe allow="clipboard-write; microphone" src="https://dparagiri.embed-omniapp.co/dashboards/35441517"></iframe>
-```
+The project was built for Omni's Growth Engineering take-home. It includes an ETL pipeline, dbt analytics models, Omni semantic-layer files, and a live Omni dashboard.
 
 ## Executive Summary
+
+The live Omni dashboard is available here: [Omni Growth Intelligence](https://dparagiri.embed-omniapp.co/dashboards/35441517).
 
 The business question is: which domains already write about analytics and BI competitors, are missing Omni, and are worth Growth Marketing investigation?
 
@@ -29,6 +21,20 @@ The most actionable overlap signal is with adjacent modern-BI and semantic-layer
 The top-ranked opportunity domains include broad developer, data, startup, and software ecosystems such as `github.com`, `dev.to`, `ycombinator.com`, `github.io`, `blogspot.com`, `rudderstack.com`, `tdwi.org`, `builtin.com`, `fivetran.com`, and `stackshare.io`. These should not be treated as automatic outreach targets. They are the first review queue because they combine authority, competitor co-linking, and category-adjacent signal.
 
 The final dashboard should therefore center on a ranked opportunity table, supported by company backlink summary, competitor overlap, and high-authority competitor-only views. The dashboard is a decision-support surface for Growth Marketing, not a decorative chart set.
+
+## Non-Technical Overview
+
+Omni wants to know where its competitors are being mentioned on the web and where Omni is missing from that conversation. Crawlback uses public Common Crawl link data to find domains that link to BI and analytics competitors such as Tableau, Looker, Sigma, Hex, Metabase, and ThoughtSpot.
+
+The useful signal is not just "this site is popular." The stronger signal is "this site already links to several companies in Omni's category, but not to Omni." That makes the domain more likely to be relevant for marketing review, comparison-page outreach, partner ecosystem review, or content strategy.
+
+The output is a ranked list of domains for Growth Marketing to inspect first. The dashboard also shows how Omni's backlink footprint compares with competitors, which competitors overlap most with Omni's current footprint, and how many opportunities fall into each priority tier.
+
+## Dashboard Preview
+
+![Omni dashboard overview](assets/omni-dashboard-overview.png)
+
+![Opportunity tier summary](assets/omni-dashboard-tier-summary.png)
 
 ## What This Answers
 
@@ -154,6 +160,21 @@ Competitor co-linking is the main signal because it identifies domains already p
 dbt builds the truth tables and enforces the important invariants with tests. Omni sits on top as the semantic and dashboard layer. This keeps scoring, joins, and definitions version-controlled and testable rather than buried inside dashboard SQL.
 
 ## Architecture
+
+### Data Flow
+
+```mermaid
+flowchart TD
+    A["Common Crawl Web Graph"] --> B["Stream domain vertices, edges, and ranks"]
+    B --> C["Filter links to Omni and configured competitors"]
+    C --> D["Write CSV checkpoints under data/extracts"]
+    D --> E["Load raw tables into DuckDB or MotherDuck"]
+    E --> F["dbt staging models clean raw graph data"]
+    F --> G["dbt intermediate models build overlap and rank rollups"]
+    G --> H["dbt marts expose backlink facts, opportunities, summaries, and overlap"]
+    H --> I["Omni Topics and dashboard"]
+    I --> J["Growth Marketing review queue"]
+```
 
 ```text
 Common Crawl Web Graph
